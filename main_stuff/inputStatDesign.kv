@@ -1,0 +1,67 @@
+#:kivy 2.0
+<ScreenManager>:
+	Startup:
+		name: 'startup'
+	Display_1:
+		name: 'display_1'
+	Display_2:
+		name: 'display_2'
+	Display_3:
+		name: 'display_3'
+
+<Startup>:
+	BoxLayout:
+		cols: 1
+		orientation: "vertical"
+		size: root.width, root.height
+		spacing: 20
+		padding: 20
+		
+		Button:
+			text: "Select Dataset"
+			font_size: 32
+			on_release:
+				root.file_selector()
+				root.manager.current = 'display_1'
+				root.manager.transition.direction = 'left'
+				
+			size_hint_y: None
+			height: 25
+			size: (50, 100)
+			
+		Button:
+			text: "Submit"
+			font_size: 32
+			color: (0,0,0,1)
+			background_normal: ''
+			background_color: (0,.6,0,1)
+			on_release: 
+				root.press()
+				root.manager.current = 'display_3'
+				root.manager.transition.direction = 'left'
+			size_hint_y: None
+			height: 25
+			size: (50, 100)
+			
+
+		Label:
+			text:'© QuickStat Team. All Rights Reserved.'
+			font_size: 15
+			size_hint_y: None
+			height: 25
+			size: (50, 100)
+			background_color: (1,1,1,1)
+
+
+<Display_1>:
+	on_enter: root.data_fill()
+	GridLayout:
+		cols: 2
+
+<Display_2>:
+	on_enter: root.data_fill()
+	GridLayout:
+		cols: 2
+
+<Display_3>:
+	on_enter: root.build_columns_as_tabs()
